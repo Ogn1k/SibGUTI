@@ -1,0 +1,14 @@
+output
+x64
+Debug
+lab12.dir
+CMakeFiles
+.vs
+
+*.sln
+*.vcxproj
+*.vcxproj.filters
+*.vcxproj.filters.user
+*.vcxproj.user
+CMakeCache.txt
+cmake_install.cmake
