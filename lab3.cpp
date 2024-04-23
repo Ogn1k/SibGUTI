@@ -20,44 +20,46 @@ float stringToFloat(const std::string& str)
     return result;
 }
 
-bool Next_p(std::vector<int>& arr, int n)
-{
-    int k = n-2;
-    while(k>=0 && arr[k] >= arr[k+1])
-    {
-        k-=1;
-        if(k==-1) return false;
+bool Next_p(std::vector<int>& arr) {
+    int k = arr.size() - 2;
+    while (k >= 0 && arr[k] >= arr[k + 1]) {
+        k--;
     }
-    int l = n-1;
-    while(arr[k] >= arr[l])
-        l-=1;
+    if (k < 0) {
+        return false; // Перестановки закончились
+    }
+    int l = arr.size() - 1;
+    while (arr[k] >= arr[l]) {
+        l--;
+    }
     std::swap(arr[k], arr[l]);
-    std::reverse(arr.begin(), arr.end());
+    std::reverse(arr.begin() + k + 1, arr.end());
     return true;
 }
 
 int main()
 {
     setlocale(LC_ALL, "");
-    std::vector<int> a;
-    std::string aa = "";
+    std::vector<int> a = {4, 2, 5, 1, 3};
+    // std::string aa = "";
     
-    std::cout << "enter array\n";
-    while(aa != "end")
-    {
-        std::cin >> aa;
-        if(isFloat(aa))
-        {
-            a.insert(a.begin(), stringToFloat(aa));
-        }
-    }
+    // std::cout << "enter array\n";
+    // while(aa != "end")
+    // {
+    //     std::cin >> aa;
+    //     if(isFloat(aa))
+    //     {
+    //         a.insert(a.begin(), stringToFloat(aa));
+    //     }
+    // }
     std::sort(a.begin(), a.end());
-
+    //for(int n : a) std::cout << n << " ";
+    std::cout << "\n";
     do
     {
         for(int n : a) std::cout << n << " ";
         std::cout << "\n";
     }
-    while(Next_p(a,a.size()));
+    while(Next_p(a));
     return 0;
 }

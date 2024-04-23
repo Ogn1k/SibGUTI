@@ -82,33 +82,33 @@ bool IsTransitive(const std::vector<std::pair<float, float>>& R)
 int main()
 {
     setlocale(LC_ALL, "");
-    std::vector<float> a;
+    std::vector<float> a = {1, 2, 3, 4, 5, 6};
     std::string aa = "";
 
-    std::vector<std::pair<float, float>> R;
+    std::vector<std::pair<float, float>> R = {{1, 2}, {3, 4}, {5, 6}};
     std::string ab = "", ba = "";
 
-    std::cout << "enter array\n";
-    while(aa != "end")
-    {
-        std::cin >> aa;
-        if(isFloat(aa))
-        {
-            a.insert(a.begin(), stringToFloat(aa));
-        }       
-    }
+    // std::cout << "enter array\n";
+    // while(aa != "end")
+    // {
+    //     std::cin >> aa;
+    //     if(isFloat(aa))
+    //     {
+    //         a.insert(a.begin(), stringToFloat(aa));
+    //     }       
+    // }
 
-    std::cout << "enter pairs\n";
-    int i =0;
-    while(ab != "end" || ba != "end")
-    {
-        std::cin >> ab >> ba;
-        if(isFloat(ab))
-        {
-            R[i].first == stringToFloat(ab);
-            R[i].second == stringToFloat(ba);
-        }       
-    }
+    // std::cout << "enter pairs\n";
+    // int i =0;
+    // while(ab != "end" || ba != "end")
+    // {
+    //     std::cin >> ab >> ba;
+    //     if(isFloat(ab))
+    //     {
+    //         R[i].first == stringToFloat(ab);
+    //         R[i].second == stringToFloat(ba);
+    //     }       
+    // }
     std::sort(a.begin(), a.end());
 
     for (int i = 0; i < R.size(); ++i) {

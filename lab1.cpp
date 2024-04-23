@@ -43,7 +43,7 @@ int main()
     std::vector<float> b;
     std::string bb = "";
 
-    std::vector<float> c;
+    std::vector<float> c; // result array
 
     int cc;
 
