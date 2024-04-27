@@ -6,6 +6,35 @@
 
 using namespace std;
 
+template <typename T>
+void quicksort(std::vector<T>& arr, int left, int right) {
+    if (left >= right) {
+        return;
+    }
+
+    int pivot = arr[(left + right) / 2];
+    int i = left;
+    int j = right;
+
+    while (i <= j) {
+        while (arr[i] < pivot) {
+            i++;
+        }
+        while (arr[j] > pivot) {
+            j--;
+        }
+        if (i <= j) {
+            std::swap(arr[i], arr[j]);
+            i++;
+            j--;
+        }
+    }
+
+    // Рекурсивные вызовы для левой и правой частей
+    quicksort(arr, left, j);
+    quicksort(arr, i, right);
+}
+
 bool isFloat(const std::string& str) 
 {
     std::istringstream iss(str);
@@ -53,12 +82,12 @@ vector<vector<int>> findConnectedComponents(const vector<vector<int>>& adjMatrix
 int main() {
 
     setlocale(LC_ALL, "");
-    // Пример матрицы смежности (замените на ввод пользователя)
+    // Пример матрицы смежности 
     vector<vector<int>> adjacencyMatrix = {
-        {0, 1, 0, 1},
+        {0, 1, 1, 1},
         {1, 0, 1, 0},
-        {0, 1, 0, 0},
-        {1, 0, 0, 0}
+        {1, 1, 3, 1},
+        {1, 0, 1, 0}
     };
 
     
@@ -81,6 +110,7 @@ int main() {
     // }
 
     auto connectedComponents = findConnectedComponents(adjacencyMatrix);
+
     for (int i = 0; i < connectedComponents.size(); ++i) {
         cout << "Компонента " << i + 1 << ": ";
         for (int vertex : connectedComponents[i]) {
