@@ -29,7 +29,7 @@ struct Geometry
     Polygon polygon;
 };
 
-std::vector<Point> Parse_Coordinates(const std::string& text, const size_t line) 
+std::vector<Point> Parse_Coordinates(const std::string& text, const size_t line, bool &error) 
 {
     std::vector<Point> points;
     std::stringstream ss(text);
@@ -48,7 +48,7 @@ std::vector<Point> Parse_Coordinates(const std::string& text, const size_t line)
             //проверка на правильность написания координат
             size_t column = text.find(pair) + 1;
             std::cerr << "error: line " << line << " column " << column+8 << " expected double" << std::endl;
-            exit(EXIT_FAILURE);
+            error = true;
         }
 
         //ss_pair >> point.x >> point.y;
@@ -89,6 +89,7 @@ bool isValidPolygon(const std::string& line, size_t line_number) {
 
 std::vector<Geometry> Read_File(const std::string& file_name) 
 {
+    bool error = false;
     std::vector<Geometry> geometries;
     std::ifstream file( file_name );
     std::string line;
@@ -113,14 +114,14 @@ std::vector<Geometry> Read_File(const std::string& file_name)
         if (type == "polygon" || type == "triangle")
         {
             if (!isValidPolygon(line, line_number)) {
-                exit(EXIT_FAILURE);
+                error = true;
             }
 
             size_t start = line.find("(");
             size_t end = line.find(")");
 
             std::string coordinatesText = line.substr(start + 1, end - start - 1);
-            geometry.polygon.points = Parse_Coordinates(coordinatesText, line_number);
+            geometry.polygon.points = Parse_Coordinates(coordinatesText, line_number, error);
         }
         else if (type == "circle") 
         {
@@ -133,14 +134,14 @@ std::vector<Geometry> Read_File(const std::string& file_name)
 
             if (!isValidCircle(line, line_number))
              {
-                exit(EXIT_FAILURE);
+                error = true;
             }
 
             if (!(iss >> bracket1 >> center.x >> center.y >> comma >> radius >> bracket2) || bracket1 != '(' || comma != ',' || bracket2 != ')' ) 
             {
                 size_t column = line.find_first_of("1234567890.");
                 std::cerr << "Error at line " << line_number << " column " << column << std::endl;
-                exit(EXIT_FAILURE);
+                error = true;
             }
 
             geometry.circle.center = center;
@@ -151,6 +152,7 @@ std::vector<Geometry> Read_File(const std::string& file_name)
             if( !rest_line.empty())
             {
                 std::cerr << "error: line " << line_number << " column " << line.size() << std::endl;
+                error = true;
             }
 
             iss >> comma >> geometry.circle.center.x >> geometry.circle.center.y >> comma >> geometry.circle.radius;
@@ -158,12 +160,15 @@ std::vector<Geometry> Read_File(const std::string& file_name)
         else
         {
             std::cout << "error: " << type << ": expected 'CIRCLE' or 'POLYGON'" << std::endl;
-            exit(EXIT_FAILURE);
+            error = true;
         }
 
-        geometries.push_back(geometry);
+        if(!error)
+            geometries.push_back(geometry);
     }
     
     file.close();
+    if(error)
+        return {};
     return geometries;
 }

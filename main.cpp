@@ -1,4 +1,6 @@
+#define CTEST_MAIN
 #include "geometry.cpp"
+#include "ctest.h"
 
 int main()
 {
@@ -42,4 +44,11 @@ int main()
 
 
     return 0;
+}
+
+CTEST(geometry_suite, geometry_test)
+{
+    std::string result;
+    std::string expected;
+    ASSERT_STR(expected.c_str(), result.c_str());
 }
