@@ -1,3 +1,7 @@
+#pragma once
+#include "myList.cpp"
+
+
 template <typename T>
 class Queue : public List<T> {
 public:

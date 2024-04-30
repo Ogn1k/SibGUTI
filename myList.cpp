@@ -1,3 +1,6 @@
+#pragma once
+#include <iostream>
+
 template <typename T>
 class Node {
 public:
@@ -115,7 +118,7 @@ public:
         std::cout << std::endl;
     }
 
-    T& operator ()
+    T& operator[](int index)
     {
         if (index < 0 || index >= listSize) {
             throw std::out_of_range("Index out of range");

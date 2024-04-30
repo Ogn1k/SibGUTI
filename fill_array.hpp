@@ -3,6 +3,7 @@
 #include <iostream>
 #include <iomanip>
 #include <string>
+#include <list>
 
 template <typename T> void swap(T &var1, T &var2)
 {
@@ -20,6 +21,16 @@ int* FillRand(int arr[], int size)
     return arr;
 }
 
+std::list<int>& FillRandL(std::list<int> &arr, int size)
+{
+    arr.clear();
+    for(int i =0; i<size; i++)
+    {
+        arr.push_back(rand() % 100 +1);
+    }
+    return arr;
+}
+
 int* FillDec(int arr[], int size)
 {
     for(int i = 0; i<size; i++)
@@ -29,11 +40,31 @@ int* FillDec(int arr[], int size)
     return arr;
 }
 
+std::list<int>& FillDecL(std::list<int> &arr, int size)
+{
+    arr.clear();
+    for(int i = 0; i<size; i++)
+    {
+        arr.push_back(size - i);
+    }
+    return arr;
+}
+
 int* FillInc(int arr[], int size)
 {
     for(int i = 0; i<size; i++)
     {
         arr[i] = i;
+    }
+    return arr;
+}
+
+std::list<int>& FillIncL(std::list<int> &arr, int size)
+{
+    arr.clear();
+    for(int i = 0; i<size; i++)
+    {
+        arr.push_back(i);
     }
     return arr;
 }

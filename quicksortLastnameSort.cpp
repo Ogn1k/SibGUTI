@@ -52,7 +52,7 @@ void quicksort(string& str) {
 
 int main() {
     setlocale(LC_ALL, "");
-    string str = "кривощековал";
+    string str = "федорушкинст";
     cout << "Original string: " << str << endl;
     quicksort(str);
     cout << "Sorted string: " << str << endl;

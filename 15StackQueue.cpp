@@ -3,7 +3,6 @@
 #include <stdexcept>
 #include "myQueue.cpp"
 #include "myStack.cpp"
-#include "myList.cpp"
 
 void FillInc_stack(Stack<int> &stack, int size)
 {
@@ -68,16 +67,17 @@ int SeriesSumm_list(List<T> list)
         if(summ>maxSumm)
             maxSumm = summ;
     }
-    return summ;
+    return summ+1;
 }
 
 int main() 
 {
     setlocale(LC_ALL, "");
     List<int> list;
-    for(int i = 0; i<5; i++) list.push_back(1);
+    for(int i = 0; i<10; i++) list.push_back(1);
 
-     std::cout << SeriesSumm_list(list);
+    list.print();
+    //std::cout << SeriesSumm_list(list);
 
     return 0;
 }
