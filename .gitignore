@@ -30,5 +30,7 @@ main.c~
 *.out
 *.app
 
+output
+
 main
 *.7z
