@@ -4,7 +4,7 @@
 #include <algorithm>
 #include "fill_array.hpp"
 
-// Функция для подсчета перестановок и сравнений
+// пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 // int digitalSort(int arr[], int n) {
 //     int swaps = 0;
 //     //int n = arr.size();
@@ -17,26 +17,26 @@
 //     for (int exp = 1; maxVal / exp > 0; exp *= 10) {
 //         std::vector<int> count(10, 0);
 
-//         // Подсчет количества вхождений цифр
+//         // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
 //         for (int i = 0; i < n; ++i) {
 //             count[(arr[i] / exp) % 10]++;
 //         }
 
-//         // Обновление индексов
+//         // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 //         for (int i = 1; i < 10; ++i) {
 //             count[i] += count[i - 1];
 //         }
 
-//         // Построение отсортированного массива
+//         // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 //         for (int i = n - 1; i >= 0; --i) {
 //             output[count[(arr[i] / exp) % 10] - 1] = arr[i];
 //             count[(arr[i] / exp) % 10]--;
 //         }
 
-//         // Копирование отсортированного массива обратно в исходный
+//         // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 //         for (int i = 0; i < n; ++i) {
 //             arr[i] = output[i];
-//             swaps++; // Увеличиваем счетчик перестановок
+//             swaps++; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 //         }
 //     }
 //     return swaps;
@@ -57,36 +57,23 @@ int getMax(int arr[], int n)
     return mx;
 }
 
-// A function to do counting sort of arr[]
-// according to the digit
-// represented by exp.
 void countSort(int arr[], int n, int exp, double &swaps)
 {
 
-    // Output array
     int output[n];
     int i, count[10] = { 0 };
 
-    // Store count of occurrences
-    // in count[]
     for (i = 0; i < n; i++)
         count[(arr[i] / exp) % 10]++;
 
-    // Change count[i] so that count[i]
-    // now contains actual position
-    // of this digit in output[]
     for (i = 1; i < 10; i++)
         count[i] += count[i - 1];
 
-    // Build the output array
     for (i = n - 1; i >= 0; i--) {
         output[count[(arr[i] / exp) % 10] - 1] = arr[i];
         count[(arr[i] / exp) % 10]--;
     }
 
-    // Copy the output array to arr[],
-    // so that arr[] now contains sorted
-    // numbers according to current digit
     for (i = 0; i < n; i++)
     {
         arr[i] = output[i];
@@ -95,19 +82,12 @@ void countSort(int arr[], int n, int exp, double &swaps)
         
 }
 
-// The main function to that sorts arr[]
-// of size n using Radix Sort
 double radixsort(int arr[], int n)
 {
 
-    // Find the maximum number to
-    // know number of digits
     int m = getMax(arr, n);
     double swaps = 0;
-    // Do counting sort for every digit.
-    // Note that instead of passing digit
-    // number, exp is passed. exp is 10^i
-    // where i is current digit number
+
     for (int exp = 1; m / exp > 0; exp *= 10)
         countSort(arr, n, exp, swaps);
     return std::round(swaps);

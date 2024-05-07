@@ -3,11 +3,11 @@
 
 void shellSort(std::string& str) {
     int n = str.length();
-    int h = 1;
+    int h = 2;
 
     // Вычисляем начальное значение h
-    while (h < n / 3) {
-        h = 3 * h + 1;
+    while (h < n / 2) {
+        h = 2*h + 1;
     }
 
     while (h >= 1) {
@@ -17,15 +17,17 @@ void shellSort(std::string& str) {
             int j = i;
 
             while (j >= h && str[j - h] > key) {
+                std::cout << "Итерация с h = " << h << ": " << str << std::endl;
                 str[j] = str[j - h];
                 j -= h;
+                
             }
 
             str[j] = key;
         }
 
         // Выводим текущее состояние строки после итерации
-        std::cout << "Итерация с h = " << h << ": " << str << std::endl;
+        
 
         // Уменьшаем значение h
         h /= 3;
@@ -34,7 +36,7 @@ void shellSort(std::string& str) {
 
 int main() {
     setlocale(LC_ALL, "Russian");
-    std::string input = "курапова";
+    std::string input = "федорушкин";
     std::cout << "Исходная строка: " << input << std::endl;   
     
 
