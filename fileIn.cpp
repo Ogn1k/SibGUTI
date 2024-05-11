@@ -45,7 +45,7 @@ std::vector<Point> Parse_Coordinates(const std::string& text, const size_t line,
 
         if(!(ss_pair >> point.x >> point.y))
         {
-            //проверка на правильность написания координат
+            //РїСЂРѕРІРµСЂРєР° РЅР° РїСЂР°РІРёР»СЊРЅРѕСЃС‚СЊ РЅР°РїРёСЃР°РЅРёСЏ РєРѕРѕСЂРґРёРЅР°С‚
             size_t column = text.find(pair) + 1;
             std::cerr << "error: line " << line << " column " << column+8 << " expected double" << std::endl;
             error = true;

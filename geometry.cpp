@@ -12,36 +12,36 @@ bool onSegment( const Point& p, const Point& q, const Point& r )
 int orientation(const Point& p, const Point& q, const Point& r) 
 {
     double val = (q.y - p.y) * (r.x - q.x) - (q.x - p.x) * (r.y - q.y);
-    if (val == 0) return 0;  // коллинеарны
-    return (val > 0) ? 1 : 2; // по часовой или против часовой стрелки
+    if (val == 0) return 0;  // РєРѕР»Р»РёРЅРµР°СЂРЅС‹
+    return (val > 0) ? 1 : 2; // РїРѕ С‡Р°СЃРѕРІРѕР№ РёР»Рё РїСЂРѕС‚РёРІ С‡Р°СЃРѕРІРѕР№ СЃС‚СЂРµР»РєРё
 }
 
 bool doIntersect( const Point& p1, const Point& q1, const Point& p2, const Point& q2 ) 
 {
-    // четыре ориентации троек точек, образованных отрезками
+    // С‡РµС‚С‹СЂРµ РѕСЂРёРµРЅС‚Р°С†РёРё С‚СЂРѕРµРє С‚РѕС‡РµРє, РѕР±СЂР°Р·РѕРІР°РЅРЅС‹С… РѕС‚СЂРµР·РєР°РјРё
     int o1 = orientation(p1, q1, p2);
     int o2 = orientation(p1, q1, q2);
     int o3 = orientation(p2, q2, p1);
     int o4 = orientation(p2, q2, q1);
 
-    // Общий случай
+    // РћР±С‰РёР№ СЃР»СѓС‡Р°Р№
     if ( o1 != o2 && o3 != o4 )
         return true;
 
-    // Особые случаи
-    // p1, q1 и p2 коллинеарны и p2 лежит на отрезке p1q1
+    // РћСЃРѕР±С‹Рµ СЃР»СѓС‡Р°Рё
+    // p1, q1 Рё p2 РєРѕР»Р»РёРЅРµР°СЂРЅС‹ Рё p2 Р»РµР¶РёС‚ РЅР° РѕС‚СЂРµР·РєРµ p1q1
     if ( o1 == 0 && onSegment(p1, p2, q1) ) return true;
 
-    // p1, q1 и q2 коллинеарны и q2 лежит на отрезке p1q1
+    // p1, q1 Рё q2 РєРѕР»Р»РёРЅРµР°СЂРЅС‹ Рё q2 Р»РµР¶РёС‚ РЅР° РѕС‚СЂРµР·РєРµ p1q1
     if ( o2 == 0 && onSegment(p1, q2, q1) ) return true;
 
-    // p2, q2 и p1 коллинеарны и p1 лежит на отрезке p2q2
+    // p2, q2 Рё p1 РєРѕР»Р»РёРЅРµР°СЂРЅС‹ Рё p1 Р»РµР¶РёС‚ РЅР° РѕС‚СЂРµР·РєРµ p2q2
     if ( o3 == 0 && onSegment(p2, p1, q2) ) return true;
 
-     // p2, q2 и q1 коллинеарны и q1 лежит на отрезке p2q2
+     // p2, q2 Рё q1 РєРѕР»Р»РёРЅРµР°СЂРЅС‹ Рё q1 Р»РµР¶РёС‚ РЅР° РѕС‚СЂРµР·РєРµ p2q2
     if ( o4 == 0 && onSegment(p2, q1, q2) ) return true;
 
-    return false; // Нет пересечения
+    return false; // РќРµС‚ РїРµСЂРµСЃРµС‡РµРЅРёСЏ
 }
 
 double distance( const Point& p1, const Point& p2 ) 
@@ -116,7 +116,7 @@ bool Is_Polygon_Polygon_Intersecting( const Polygon& polygon1, const Polygon& po
             Point q1 = polygon2.points[j];
             Point q2 = polygon2.points[(j + 1) % polygon2.points.size()];
             
-            // Проверяем пересечение отрезков
+            // РџСЂРѕРІРµСЂСЏРµРј РїРµСЂРµСЃРµС‡РµРЅРёРµ РѕС‚СЂРµР·РєРѕРІ
             if ( doIntersect(p1, p2, q1, q2) )
                 return true;
         }
