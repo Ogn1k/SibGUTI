@@ -1,85 +1,68 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include "myvector.cpp"
-#include <algorithm>
-#include <string>
-#include <ctime>
 #include <iostream>
+#include <list>
+#include <vector>
 
-void qsort(int *arr, int n)
-{
-    int i = 0, j = n - 1;
-    int mid = arr[n / 2];
-    do 
-    {
-        while(arr[i] < mid) 
-        {
-            i++;
-        }
-        while(arr[j] > mid) 
-        {
-            j--;
-        }
-        if (i <= j) 
-        {
-            int tmp = arr[i];
-            arr[i] = arr[j];
-            arr[j] = tmp;
+class HashTable {
+private:
+    std::vector<std::list<int>> table;
+    int bucketCount;
 
-            i++;
-            j--;
-        }
-    } while (i <= j);
-
-    if(j > 0) 
-    {
-        qsort(arr, j + 1);
+    int hashFunction(int key) {
+        return key % bucketCount;
     }
-    if (i < n) 
-    {
-        qsort(&arr[i], n - i);
-    }
-}
 
-struct PhoneNum
-{
-    std::string Name;
-    int Number;
+public:
+    HashTable(int size) : bucketCount(size) {
+        table.resize(bucketCount);
+    }
+
+    void insert(int key) {
+        int index = hashFunction(key);
+        table[index].push_back(key);
+    }
+
+    void remove(int key) {
+        int index = hashFunction(key);
+        table[index].remove(key);
+    }
+
+    bool search(int key) {
+        int index = hashFunction(key);
+        for (int item : table[index]) {
+            if (item == key) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    void display() {
+        for (int i = 0; i < bucketCount; ++i) {
+            std::cout << i << ": ";
+            for (int item : table[i]) {
+                std::cout << item << " -> ";
+            }
+            std::cout << "NULL" << std::endl;
+        }
+    }
 };
 
-bool customer_sorter(PhoneNum *lhs, PhoneNum *rhs) 
-{
-    if (lhs->Name != rhs->Name)
-        return lhs->Name < rhs->Name;
-    return lhs->Name < rhs->Name;
-}
+int main() {
+    HashTable hashTable(7);
 
-int main()
-{
-  //srand(time(NULL));
-    {
-        int n=10;
-        PhoneNum * a = new PhoneNum[n];
-        PhoneNum ** b = new PhoneNum*[n];
+    hashTable.insert(10);
+    hashTable.insert(20);
+    hashTable.insert(15);
+    hashTable.insert(7);
+    hashTable.insert(30);
 
-        for (int j = 0, i = n; i > 0; i--, j++) 
-        {
-            
-            a[j] = {"name"+std::to_string(i), rand()% 200 - 100};
-            b[j] = &a[j];
-        }
-        std::sort(b, b+n, &customer_sorter);
-        //std::sort(b,b+n,[](const PhoneNum* lhs, const PhoneNum* rhs){ return *lhs->Name < *rhs->Name; });
-        printf("a:");
-            for (int i = 0; i < n; ++i) 
-            {
-                std::cout << a[i].Name << " ";
-            }
-        printf("\nb:");
-        for (int i = 0; i < n; ++i) 
-            {
-                std::cout << b[i]->Name << " ";
-            }
-    }
+    hashTable.display();
 
+    std::cout << "Search 15: " << (hashTable.search(15) ? "Found" : "Not Found") << std::endl;
+    std::cout << "Search 25: " << (hashTable.search(25) ? "Found" : "Not Found") << std::endl;
+
+    hashTable.remove(15);
+    hashTable.display();
+
+    return 0;
 }

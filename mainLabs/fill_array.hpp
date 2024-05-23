@@ -4,6 +4,7 @@
 #include <iomanip>
 #include <string>
 #include <list>
+#include <vector>
 
 template <typename T> void swap(T &var1, T &var2)
 {
@@ -13,6 +14,15 @@ template <typename T> void swap(T &var1, T &var2)
 }
 
 int* FillRand(int arr[], int size)
+{
+    for(int i =0; i<size; i++)
+    {
+        arr[i] = rand() % 100 +1;
+    }
+    return arr;
+}
+
+inline std::vector<int> FillRand(std::vector<int> arr, int size)
 {
     for(int i =0; i<size; i++)
     {
@@ -31,7 +41,16 @@ std::list<int>& FillRandL(std::list<int> &arr, int size)
     return arr;
 }
 
-int* FillDec(int arr[], int size)
+inline int* FillDec(int arr[], int size)
+{
+    for(int i = 0; i<size; i++)
+    {
+        arr[i] = size - i; 
+    }
+    return arr;
+}
+
+inline std::vector<int> FillDec(std::vector<int> arr, int size)
 {
     for(int i = 0; i<size; i++)
     {
@@ -51,6 +70,15 @@ std::list<int>& FillDecL(std::list<int> &arr, int size)
 }
 
 int* FillInc(int arr[], int size)
+{
+    for(int i = 0; i<size; i++)
+    {
+        arr[i] = i;
+    }
+    return arr;
+}
+
+inline std::vector<int> FillInc(std::vector<int> arr, int size)
 {
     for(int i = 0; i<size; i++)
     {
