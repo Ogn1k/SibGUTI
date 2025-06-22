@@ -19,10 +19,15 @@ void heapify(vector<char>& arr, int n, int i) {
 
     // Если самый большой элемент не корень
     if (largest != i) {
+        // for (char c : arr)
+        //     cout << c;
+        // cout << " heapify bs" << endl;
+
+        swap(arr[i], arr[largest]);
+
         for (char c : arr)
             cout << c;
-        cout << " heapify" << endl;
-        swap(arr[i], arr[largest]);
+        cout << " heapify as" << endl;
 
         // Рекурсивно преобразуем в двоичную кучу затронутое поддерево
         heapify(arr, n, largest);
@@ -38,13 +43,18 @@ void heapsort(vector<char>& arr) {
 
     // Один за другим извлекаем элементы из кучи
     for (int i = n - 1; i > 0; i--) {
+
+        // for (char c : arr)
+        //     cout << c ;
+        // cout << " sort bs" << endl;
+
         // Перемещаем текущий корень в конец
         swap(arr[0], arr[i]);
 
         // Выводим текущую итерацию
         for (char c : arr)
             cout << c ;
-        cout << " sort" << endl;
+        cout << " sort as" << endl;
 
         // вызываем процедуру heapify на уменьшенной куче
         heapify(arr, i, 0);
@@ -53,7 +63,7 @@ void heapsort(vector<char>& arr) {
 
 int main() {
         setlocale(LC_ALL, "Russian");
-    string str = "федорушкинст";
+    string str = "ковтуненкоан";
     vector<char> arr(str.begin(), str.end());
 
     cout << "Исходная строка: " << str << endl;

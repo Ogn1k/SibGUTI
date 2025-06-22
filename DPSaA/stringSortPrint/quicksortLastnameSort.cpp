@@ -81,7 +81,7 @@ void quickSortss(std::string& arr, int L, int R) {
 
 int main() {
     setlocale(LC_ALL, "Russian");
-    string str = "федорушкин";
+    string str = "ковтуненкоан";
     cout << "Original string: " << str << endl;
     //quicksort(str);
     quickSortss(str, 0, str.length()-1);
